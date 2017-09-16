@@ -1,0 +1,46 @@
+.App {
+}
+
+.App-logo {
+  height: 40px;
+}
+
+.App-header {
+  background-color: #ACD;
+  height: 65px;
+  padding: 10px;
+  padding-left: 30px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.subreddit {
+  display: block;
+  font-size: 15px;
+  padding-bottom: 10px;
+}
+
+.redditPostTitle {
+  font-size: 20px;
+}
+
+.postList {
+  padding: 5px;
+}
+
+.postCard {
+  margin: 5px;
+  max-width: 1000px;
+}
+
+.cardBlock {
+  padding-top: 15px;
+  padding-bottom: 0px;
+}
+
+.metaData {
+  font-size: 11px;
+}

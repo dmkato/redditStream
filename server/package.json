@@ -1,14 +1,16 @@
 {
-  "name": "reddit-stream",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "redditData.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "pre-start": "npm install"
   },
   "author": "Daniel Kato",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.15.4",
     "request": "^2.81.0",
     "request-promise": "^4.2.1"
   },
