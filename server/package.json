@@ -5,11 +5,14 @@
   "main": "redditData.js",
   "scripts": {
     "start": "node index.js",
-    "pre-start": "npm install"
+    "pre-start": "npm install",
+    "lint": "node_modules/.bin/eslint . --fix",
+    "test": "mocha"
   },
   "author": "Daniel Kato",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.1",
     "express": "^4.15.4",
     "request": "^2.81.0",
     "request-promise": "^4.2.1"
@@ -17,6 +20,9 @@
   "devDependencies": {
     "eslint": "^4.6.1",
     "eslint-config-airbnb-base": "^12.0.0",
-    "eslint-plugin-import": "^2.7.0"
+    "eslint-plugin-import": "^2.7.0",
+    "mocha": "^3.5.3",
+    "proxyquire": "^1.8.0",
+    "sinon": "^3.2.1"
   }
 }

@@ -5,25 +5,25 @@ const redditData = require('./redditData.js');
 let posts = []; // <- DB
 
 const loadAllPosts = (req, res) => {
-   if (posts.length > 0) {
-      console.log('Posts Already Loaded')
-      res.send(posts);
-   } else {
-      redditData.loadAllPosts()
-         .then((curPosts) => {
-            posts = curPosts;
-            console.log('Loaded Posts')
-            res.send(posts);
-         });
-   }
-}
+  if (posts.length > 0) {
+    console.log('Posts Already Loaded');
+    res.send(posts);
+  } else {
+    redditData.loadAllPosts()
+      .then((curPosts) => {
+        posts = curPosts;
+        console.log('Loaded Posts');
+        res.send(posts);
+      });
+  }
+};
 
 const getImage = (req, res) => {
-   redditData.getImage(req.body.url)
-      .then((image) => {
-         res.send(image);
-      })
-}
+  redditData.getImage(req.body.url)
+    .then((image) => {
+      res.send(image);
+    });
+};
 
 // const updatePostList = () => {
 //
@@ -46,6 +46,6 @@ const getImage = (req, res) => {
 // Display contents
 
 module.exports = {
-   loadAllPosts,
-   getImage
-}
+  loadAllPosts,
+  getImage,
+};

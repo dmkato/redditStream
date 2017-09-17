@@ -16,14 +16,12 @@ const loadAllPosts = () => {
 };
 
 const getImage = (url) => {
-   console.log(`Getting Image from {url}`);
-   return rp(url)
-      .then((res) => {
-         return res.body
-      })
-}
+  console.log(`Getting Image from ${url}`);
+  return rp(url)
+    .then(res => res.body);
+};
 
 module.exports = {
   loadAllPosts,
-  getImage
+  getImage,
 };

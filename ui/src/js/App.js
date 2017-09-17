@@ -36,6 +36,7 @@ class RedditPost extends Component {
          .then((res) => res.blob())
          .then((blob) => {
              const localImageUrl = URL.createObjectURL(blob);
+             console.log(`Blob {blob}`)
              this.setState({localImageUrl})
          })
    }
@@ -47,12 +48,9 @@ class RedditPost extends Component {
       const curHrs = Math.floor(Date.now() / 3600000);
       const elapsedHours = curHrs - postDateHrs;
 
-      console.log(this.state.localImageUrl)
-
       return (
          <Card className="postCard" key={post.id}>
             <CardBlock className="cardBlock">
-               <p>{this.props.url}</p>
                <CardSubtitle className='subreddit'>
                   r/{post.subreddit} | {elapsedHours} hrs ago
                </CardSubtitle>
