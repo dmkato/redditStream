@@ -12,7 +12,17 @@ const loadAllPosts = () => {
   console.log('Loading Reddit Initial Posts');
   return rp(options)
     .then(res => res.data.children)
-    .then(posts => posts.map(post => post.data));
+    .then(posts => posts.map(post => post.data))
+    .then(posts => posts.map(post => ({
+      subreddit: post.subreddit,
+      id: post.id,
+      title: post.title,
+      images: post.preview ? post.preview.images[0].resolutions : null,
+      thumbnail: post.thumbnail,
+      created_utc: post.created_utc,
+      url: post.url,
+      author: post.author,
+    })));
 };
 
 const getImage = (url) => {

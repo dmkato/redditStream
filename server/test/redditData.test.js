@@ -1,40 +1,49 @@
-
-const testData = require('./testData.json');
+const testResponse = require('./data/testResponse.json');
+const testPosts = require('./data/testPosts.json');
 const assert = require('assert');
 const sinon = require('sinon');
 const proxyquire = require('proxyquire');
 
-describe('redditData', () => {
-  let rp
-  let redditData
-
-  beforeEach(function() {
-    rp = sinon.mock();
-    redditData = proxyquire('../js/redditData.js', {
-      'request-promise': rp,
-    });
+const createTestContext = (() => {
+  const rp = sinon.mock();
+  const redditData = proxyquire('../js/redditData.js', {
+    'request-promise': rp,
   });
 
-  it('Should load all posts', (done) => {
-    rp.returns(Promise.resolve(testData.response));
+  return {
+    rp,
+    redditData,
+  };
+});
 
-    redditData.loadAllPosts()
+describe('redditData', () => {
+  it('Should load all posts', (done) => {
+    const { rp, redditData } = createTestContext();
+    rp.returns(Promise.resolve(testResponse));
+
+     redditData.loadAllPosts()
       .then((posts) => {
-        assert.deepEqual(posts, testData.posts,
-          'should isolate data object in each post');
+        assert.deepEqual(posts, testPosts,
+          'should isolate data object in each post',
+        );
         done();
-      });
+      })
+      .catch(e => console.log(e))
   });
 
   it('Should load image from url', (done) => {
-    const expectedRes = 'image'
-    rp.returns(Promise.resolve({body: expectedRes}));
+    const { rp, redditData } = createTestContext();
+    const expectedRes = 'image';
+    rp.returns(Promise.resolve({ body: expectedRes }));
 
     redditData.getImage('FakeUrl')
       .then((image) => {
-        assert.equal(image, expectedRes,
-          'should relay body of get request to url');
+        assert.equal(
+          image, expectedRes,
+          'should relay body of get request to url',
+        );
         done();
-      });
-  })
+      })
+      .catch(e => console.log(e))
+  });
 });

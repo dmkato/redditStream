@@ -8,18 +8,18 @@ const loadAllPosts = (req, res) => {
   if (posts.length > 0) {
     console.log('Posts Already Loaded');
     res.send(posts);
-  } else {
-    redditData.loadAllPosts()
-      .then((curPosts) => {
-        posts = curPosts;
-        console.log('Loaded Posts');
-        res.send(posts);
-      });
+    return Promise.resolve();
   }
+  return redditData.loadAllPosts()
+    .then((curPosts) => {
+      posts = curPosts;
+      console.log('Loaded Posts');
+      res.send(posts);
+    });
 };
 
 const getImage = (req, res) => {
-  redditData.getImage(req.body.url)
+  return redditData.getImage(req.body.url)
     .then((image) => {
       res.send(image);
     });
