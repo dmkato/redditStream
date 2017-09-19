@@ -10,15 +10,23 @@
     "react-addons-transition-group": "^15.6.0",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.13",
-    "reactstrap": "^4.8.0"
+    "reactstrap": "^4.8.0",
+    "request-promise": "^4.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint . --fix"
   },
   "proxy": "http://localhost:8001",
   "author": "Daniel Kato",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.3.0"
+  }
 }

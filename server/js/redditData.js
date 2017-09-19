@@ -9,29 +9,30 @@ const options = {
 };
 
 const loadAllPosts = () => {
-  console.log('Loading Reddit Initial Posts');
+  console.log('Loading Initial Reddit Posts');
   return rp(options)
-    .then(res => res.data.children)
-    .then(posts => posts.map(post => post.data))
-    .then(posts => posts.map(post => ({
-      subreddit: post.subreddit,
-      id: post.id,
-      title: post.title,
-      images: post.preview ? post.preview.images[0].resolutions : null,
-      thumbnail: post.thumbnail,
-      created_utc: post.created_utc,
-      url: post.url,
-      author: post.author,
-    })));
+    .then(res => res.data.children.map(post => ({
+      subreddit: post.data.subreddit,
+      id: post.data.id,
+      title: post.data.title,
+      images: post.data.preview ? post.data.preview.images[0].resolutions : null,
+      thumbnail: post.data.thumbnail,
+      created_utc: post.data.created_utc,
+      url: post.data.url,
+      author: post.data.author
+    })))
 };
 
 const getImage = (url) => {
   console.log(`Getting Image from ${url}`);
-  return rp(url)
-    .then(res => res.body);
+  return rp({
+    url,
+    encoding: null,
+    method: 'GET'
+  })
 };
 
 module.exports = {
   loadAllPosts,
-  getImage,
+  getImage
 };

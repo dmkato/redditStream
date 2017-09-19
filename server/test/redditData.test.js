@@ -21,14 +21,15 @@ describe('redditData', () => {
     const { rp, redditData } = createTestContext();
     rp.returns(Promise.resolve(testResponse));
 
-     redditData.loadAllPosts()
+    redditData.loadAllPosts()
       .then((posts) => {
-        assert.deepEqual(posts, testPosts,
+        assert.deepEqual(
+          posts, testPosts,
           'should isolate data object in each post',
         );
         done();
       })
-      .catch(e => console.log(e))
+      .catch(e => console.log(e));
   });
 
   it('Should load image from url', (done) => {
@@ -44,6 +45,6 @@ describe('redditData', () => {
         );
         done();
       })
-      .catch(e => console.log(e))
+      .catch(e => console.log(e));
   });
 });

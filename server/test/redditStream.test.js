@@ -31,7 +31,9 @@ const createTestContext = () => {
 
 describe('redditStream', () => {
   it('Should send all posts from request', (done) => {
-    const { req, res, redditDataMock, redditStream } = createTestContext();
+    const {
+      req, res, redditDataMock, redditStream,
+    } = createTestContext();
     redditDataMock.loadAllPosts.returns(Promise.resolve(testPosts));
 
     redditStream.loadAllPosts(req, res)
@@ -39,11 +41,13 @@ describe('redditStream', () => {
         assert.equal(testPosts, res.send.args[0][0], 'should be equal');
         done();
       })
-      .catch(e => console.log(e))
+      .catch(e => console.log(e));
   });
 
   it('Should send all posts from memory', (done) => {
-    const { req, res, redditDataMock, redditStream } = createTestContext();
+    const {
+      req, res, redditDataMock, redditStream,
+    } = createTestContext();
     redditDataMock.loadAllPosts.returns(Promise.resolve(testPosts));
 
     redditStream.loadAllPosts(req, res)
@@ -53,22 +57,26 @@ describe('redditStream', () => {
           .then(() => {
             assert.equal(testPosts, res.send.args[1][0], 'should be equal');
             done();
-          })
+          });
       })
-      .catch(e => console.log(e))
+      .catch(e => console.log(e));
   });
 
   it('Should send image from url', (done) => {
-    const { req, res, redditDataMock, redditStream } = createTestContext();
-    const expectedRes = 'image'
+    const {
+      req, res, redditDataMock, redditStream,
+    } = createTestContext();
+    const expectedRes = 'image';
     redditDataMock.getImage.returns(Promise.resolve(expectedRes));
 
     redditStream.getImage(req, res)
       .then(() => {
-        assert.equal(expectedRes, res.send.args[0][0],
-          'should relay image');
+        assert.equal(
+          expectedRes, res.send.args[0][0],
+          'should relay image',
+        );
         done();
       })
-      .catch(e => console.log(e))
-  })
+      .catch(e => console.log(e));
+  });
 });

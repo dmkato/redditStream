@@ -6,24 +6,26 @@ let posts = []; // <- DB
 
 const loadAllPosts = (req, res) => {
   if (posts.length > 0) {
-    console.log('Posts Already Loaded');
+    console.log('Sending Cached Posts');
     res.send(posts);
     return Promise.resolve();
+  } else {
+    return redditData.loadAllPosts()
+      .then((curPosts) => {
+        posts = curPosts;
+        console.log('Sending New Posts');
+        res.send(posts);
+      })
+      .catch(e => console.log(e))
   }
-  return redditData.loadAllPosts()
-    .then((curPosts) => {
-      posts = curPosts;
-      console.log('Loaded Posts');
-      res.send(posts);
-    });
 };
 
-const getImage = (req, res) => {
-  return redditData.getImage(req.body.url)
-    .then((image) => {
-      res.send(image);
-    });
-};
+const getImage = (req, res) => redditData.getImage(req.body.url)
+  .then((image) => {
+    console.log(`Sending Image from ${req.body.url}`)
+    res.send(image);
+  })
+  .catch(e => console.log(e));
 
 // const updatePostList = () => {
 //
